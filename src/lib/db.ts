@@ -1,12 +1,5 @@
 import mongoose from 'mongoose';
 
-declare global {
-  var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  };
-}
-
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/financial-advisor-portal';
 
 if (!MONGODB_URI) {
@@ -15,15 +8,18 @@ if (!MONGODB_URI) {
   );
 }
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached = global.mongoose;
+// Global is used here to maintain a cached connection across hot reloads
+// in development. This prevents connections growing exponentially
+// during API Route usage.
+let cached: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } = { conn: null, promise: null };
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+// In development, we want to use a global variable to preserve the value
+// across module reloads caused by HMR (Hot Module Replacement).
+if (process.env.NODE_ENV === 'development') {
+  if (!(global as any)._mongooseCache) {
+    (global as any)._mongooseCache = { conn: null, promise: null };
+  }
+  cached = (global as any)._mongooseCache;
 }
 
 async function dbConnect() {
@@ -36,11 +32,16 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
-  cached.conn = await cached.promise;
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
   return cached.conn;
 }
 
