@@ -1,6 +1,6 @@
 # Employee User Manual
 
-This manual provides instructions for employees using the Financial Advisor Portal. The portal gives you access to financial education resources, videos, and blog posts tailored to your company and personal situation.
+This manual provides instructions for employees using the CurserBusinessAppIFA. The portal gives you access to financial education resources, videos, and blog posts tailored to your company and personal situation.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ This manual provides instructions for employees using the Financial Advisor Port
 
 ## Logging In
 
-1. You will receive an email invitation to join the Financial Advisor Portal.
+1. You will receive an email invitation to join the CurserBusinessAppIFA.
 2. Click the link in the email to set up your password.
 3. Once your password is set, you can log in at [https://your-domain.com/login](https://your-domain.com/login).
 4. Enter your email address and password.

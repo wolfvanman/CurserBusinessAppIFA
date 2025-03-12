@@ -1,6 +1,6 @@
 # Administrator User Manual
 
-This manual provides detailed instructions for administrators of the Financial Advisor Portal. As an administrator, you have access to all features of the platform, including company management, user management, content management, and communication tools.
+This manual provides detailed instructions for administrators of the CurserBusinessAppIFA. As an administrator, you have access to all features of the platform, including company management, user management, content management, and communication tools.
 
 ## Table of Contents
 
@@ -213,4 +213,4 @@ The admin dashboard provides an overview of the portal's key metrics and quick a
 
 ## Support
 
-If you encounter any issues or have questions about the Financial Advisor Portal, please contact technical support at phil@arthurbrowns.co.uk. 
+If you encounter any issues or have questions about the CurserBusinessAppIFA, please contact technical support at phil@arthurbrowns.co.uk. 
