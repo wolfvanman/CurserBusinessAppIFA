@@ -10,6 +10,7 @@ import {
   EnvelopeIcon, 
   ChatBubbleLeftRightIcon 
 } from '@heroicons/react/24/outline';
+import { Card, CardContent, CardHeader, CardTitle, Loading, PageHeader } from '@/components/ui';
 
 interface DashboardStats {
   companies: number;
@@ -51,153 +52,112 @@ export default function AdminDashboard() {
 
   const statCards = [
     {
-      name: 'Companies',
+      title: 'Companies',
       value: stats.companies,
-      icon: BuildingOfficeIcon,
+      icon: <BuildingOfficeIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/companies',
-      color: 'bg-blue-500',
     },
     {
-      name: 'Users',
+      title: 'Users',
       value: stats.users,
-      icon: UserGroupIcon,
+      icon: <UserGroupIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/users',
-      color: 'bg-green-500',
     },
     {
-      name: 'Videos',
+      title: 'Videos',
       value: stats.videos,
-      icon: FilmIcon,
+      icon: <FilmIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/videos',
-      color: 'bg-purple-500',
     },
     {
-      name: 'Blog Posts',
+      title: 'Blog Posts',
       value: stats.blogs,
-      icon: DocumentTextIcon,
+      icon: <DocumentTextIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/blog',
-      color: 'bg-yellow-500',
     },
     {
-      name: 'Emails',
+      title: 'Scheduled Emails',
       value: stats.emails,
-      icon: EnvelopeIcon,
+      icon: <EnvelopeIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/emails',
-      color: 'bg-red-500',
     },
     {
-      name: 'Contact Requests',
+      title: 'Contact Requests',
       value: stats.contacts,
-      icon: ChatBubbleLeftRightIcon,
+      icon: <ChatBubbleLeftRightIcon className="h-8 w-8 text-primary-600" />,
       href: '/dashboard/contacts',
-      color: 'bg-indigo-500',
     },
   ];
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Welcome to the Financial Advisor Portal admin dashboard. Manage companies, users, content, and communications.
-        </p>
-      </div>
+      <PageHeader
+        title="Admin Dashboard"
+        description="Overview of your CurserBusinessAppIFA portal"
+      />
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+          <Loading size="lg" />
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {statCards.map((card) => (
-            <Link
-              key={card.name}
-              href={card.href}
-              className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow"
-            >
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className={`flex-shrink-0 rounded-md p-3 ${card.color} text-white`}>
-                    <card.icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">{card.name}</dt>
-                      <dd>
-                        <div className="text-lg font-medium text-gray-900">{card.value}</div>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-5 py-3">
-                <div className="text-sm">
-                  <div className="font-medium text-primary-600 hover:text-primary-700">
-                    View all
-                  </div>
-                </div>
-              </div>
+            <Link key={card.title} href={card.href} className="block">
+              <Card className="hover:shadow-md transition-shadow">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+                  {card.icon}
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">{card.value}</div>
+                </CardContent>
+              </Card>
             </Link>
           ))}
         </div>
       )}
 
-      <div className="mt-8 bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Quick Actions</h3>
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">Add New Company</h3>
-                <div className="mt-2 max-w-xl text-sm text-gray-500">
-                  <p>Create a new company profile and set up their portal.</p>
+      <div className="mt-12">
+        <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+        <Card>
+          <CardContent className="p-6">
+            <div className="space-y-8">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <UserGroupIcon className="h-5 w-5 text-gray-400" />
                 </div>
-                <div className="mt-5">
-                  <Link href="/dashboard/companies/new" className="btn-primary inline-flex items-center">
-                    Add Company
-                  </Link>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-900">New user registered</p>
+                  <p className="text-sm text-gray-500">John Doe from Acme Inc.</p>
+                  <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <FilmIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-900">New video uploaded</p>
+                  <p className="text-sm text-gray-500">Introduction to Pension Schemes</p>
+                  <p className="text-xs text-gray-400 mt-1">Yesterday</p>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <ChatBubbleLeftRightIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-900">New contact request</p>
+                  <p className="text-sm text-gray-500">Jane Smith from XYZ Corp</p>
+                  <p className="text-xs text-gray-400 mt-1">2 days ago</p>
                 </div>
               </div>
             </div>
-
-            <div className="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">Upload New Video</h3>
-                <div className="mt-2 max-w-xl text-sm text-gray-500">
-                  <p>Add a new video to the library for companies and employees.</p>
-                </div>
-                <div className="mt-5">
-                  <Link href="/dashboard/videos/new" className="btn-primary inline-flex items-center">
-                    Upload Video
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-              <div className="px-4 py-5 sm:p-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">Create Email Campaign</h3>
-                <div className="mt-2 max-w-xl text-sm text-gray-500">
-                  <p>Send targeted emails to companies or individual employees.</p>
-                </div>
-                <div className="mt-5">
-                  <Link href="/dashboard/emails/new" className="btn-primary inline-flex items-center">
-                    Create Email
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8 bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Recent Activity</h3>
-          <div className="mt-5">
-            <p className="text-gray-500 text-sm">No recent activity to display.</p>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

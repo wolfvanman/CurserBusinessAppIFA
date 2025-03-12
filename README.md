@@ -1,4 +1,4 @@
-# Financial Advisor Portal
+# CurserBusinessAppIFA
 
 A comprehensive web-based application for a financial advisor service, tailored for businesses and their employees. This application serves as a portal for companies to access financial education and support, managed by the administrator, Phil Handley (phil@arthurbrowns.co.uk).
 
@@ -74,8 +74,8 @@ EMAIL_FROM=Phil Handley <phil@arthurbrowns.co.uk>
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/financial-advisor-portal.git
-   cd financial-advisor-portal
+   git clone https://github.com/wolfvanman/CurserBusinessAppIFA.git
+   cd CurserBusinessAppIFA
    ```
 
 2. Install dependencies:
@@ -102,7 +102,7 @@ This application can be deployed to Vercel with minimal configuration:
 ## Project Structure
 
 ```
-financial-advisor-portal/
+CurserBusinessAppIFA/
 ├── src/
 │   ├── app/                  # Next.js App Router
 │   │   ├── (admin)/          # Admin routes
@@ -144,4 +144,8 @@ This project is proprietary and confidential. Unauthorized copying, distribution
 
 ## Contact
 
-For any inquiries, please contact Phil Handley at phil@arthurbrowns.co.uk. 
+For any inquiries, please contact Phil Handley at phil@arthurbrowns.co.uk.
+
+## Repository
+
+This project is hosted at [https://github.com/wolfvanman/CurserBusinessAppIFA.git](https://github.com/wolfvanman/CurserBusinessAppIFA.git) 

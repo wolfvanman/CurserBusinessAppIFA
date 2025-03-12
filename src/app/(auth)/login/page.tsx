@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Button, Card, Input, Alert } from '@/components/ui';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -53,19 +54,25 @@ export default function LoginPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <Card className="py-8 px-4 sm:px-10">
           {error && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+            <Alert 
+              variant="error" 
+              title="Login Failed"
+              className="mb-6"
+              onClose={() => setError('')}
+            >
               {error}
-            </div>
+            </Alert>
           )}
+          
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <div className="mt-1">
-                <input
+                <Input
                   id="email"
                   name="email"
                   type="email"
@@ -73,7 +80,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="input-field"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -83,7 +90,7 @@ export default function LoginPage() {
                 Password
               </label>
               <div className="mt-1">
-                <input
+                <Input
                   id="password"
                   name="password"
                   type="password"
@@ -91,7 +98,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-field"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -99,12 +106,12 @@ export default function LoginPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
-                  id="remember_me"
-                  name="remember_me"
+                  id="remember-me"
+                  name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                   Remember me
                 </label>
               </div>
@@ -117,13 +124,13 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <button
+              <Button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+                className="w-full"
               >
                 {loading ? 'Signing in...' : 'Sign in'}
-              </button>
+              </Button>
             </div>
           </form>
 
@@ -146,7 +153,7 @@ export default function LoginPage() {
               </p>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

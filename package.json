@@ -1,7 +1,11 @@
 {
-  "name": "financial-advisor-portal",
+  "name": "curser-business-app-ifa",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wolfvanman/CurserBusinessAppIFA.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,10 +14,13 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.3.4",
     "autoprefixer": "^10.4.16",
     "aws-sdk": "^2.1540.0",
     "axios": "^1.6.5",
     "bcryptjs": "^2.4.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "date-fns": "^3.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
@@ -28,6 +35,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.49.3",
     "react-player": "^2.14.1",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
     "zod": "^3.22.4"
   },

@@ -7,7 +7,7 @@ export default function Home() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-primary-700">Financial Advisor Portal</h1>
+            <h1 className="text-2xl font-bold text-primary-700">CurserBusinessAppIFA</h1>
           </div>
           <nav>
             <ul className="flex space-x-6">
@@ -155,7 +155,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-xl font-semibold mb-4">Financial Advisor Portal</h3>
+              <h3 className="text-xl font-semibold mb-4">CurserBusinessAppIFA</h3>
               <p className="text-gray-300">
                 Providing financial education and support for businesses and their employees.
               </p>
@@ -187,7 +187,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; {new Date().getFullYear()} Financial Advisor Portal. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} CurserBusinessAppIFA. All rights reserved.</p>
           </div>
         </div>
       </footer>

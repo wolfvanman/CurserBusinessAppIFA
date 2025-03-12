@@ -6,8 +6,8 @@ import { AuthProvider } from '@/components/AuthProvider';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Financial Advisor Portal',
-  description: 'A portal for businesses and their employees to access financial education and support.',
+  title: 'CurserBusinessAppIFA',
+  description: 'Financial education and support for businesses and their employees',
 };
 
 export default function RootLayout({
