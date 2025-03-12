@@ -1,9 +1,13 @@
-import User, { IUser } from './User';
-import Company, { ICompany } from './Company';
-import Video, { IVideo } from './Video';
-import Blog, { IBlog } from './Blog';
-import Email, { IEmail } from './Email';
-import Contact, { IContact } from './Contact';
+import {
+  User,
+  Company,
+  Video,
+  Blog,
+  Email,
+  Contact,
+  IUser,
+  ICompany
+} from './supabase';
 
 export {
   User,
@@ -17,8 +21,4 @@ export {
 export type {
   IUser,
   ICompany,
-  IVideo,
-  IBlog,
-  IEmail,
-  IContact,
 }; 
