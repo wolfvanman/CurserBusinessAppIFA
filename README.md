@@ -29,7 +29,7 @@ A comprehensive web-based application for a financial advisor service, tailored 
 
 - **Frontend**: Next.js, React, TypeScript, Tailwind CSS
 - **Backend**: Node.js, Next.js API Routes
-- **Database**: MongoDB with Mongoose
+- **Database**: Supabase
 - **Authentication**: NextAuth.js
 - **Email**: Nodemailer
 - **File Storage**: AWS S3
@@ -40,7 +40,7 @@ A comprehensive web-based application for a financial advisor service, tailored 
 ### Prerequisites
 
 - Node.js (v14 or later)
-- MongoDB database
+- Supabase account and project
 - AWS S3 bucket (for file uploads)
 - SMTP server (for sending emails)
 
@@ -49,8 +49,9 @@ A comprehensive web-based application for a financial advisor service, tailored 
 Create a `.env.local` file in the root directory with the following variables:
 
 ```
-# MongoDB
-MONGODB_URI=your_mongodb_connection_string
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 # NextAuth
 NEXTAUTH_URL=http://localhost:3000
@@ -116,7 +117,7 @@ CurserBusinessAppIFA/
 │   ├── components/           # React components
 │   ├── lib/                  # Utility functions
 │   │   ├── auth.ts           # Authentication utilities
-│   │   ├── db.ts             # Database connection
+│   │   ├── supabase.ts       # Supabase client
 │   │   ├── email.ts          # Email utilities
 │   │   └── upload.ts         # File upload utilities
 │   ├── models/               # MongoDB models
