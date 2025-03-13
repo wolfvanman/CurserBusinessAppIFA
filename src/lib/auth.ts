@@ -1,8 +1,42 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { JWT } from 'next-auth/jwt';
+import { Session } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import dbConnect from './db';
 import { User } from '@/models';
+
+// Extend the Session type to include our custom properties
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role: string;
+      company: string;
+    }
+  }
+  
+  interface User {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    role: string;
+    company: string;
+  }
+}
+
+// Extend the JWT type to include our custom properties
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string;
+    role: string;
+    company: string;
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,24 +53,24 @@ export const authOptions: NextAuthOptions = {
 
         await dbConnect();
 
-        const user = await User.findOne({ email: credentials.email }).select('+password');
+        const user = await User.findOne({ email: credentials.email });
 
         if (!user) {
           return null;
         }
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await user.comparePassword(credentials.password);
 
         if (!isPasswordValid) {
           return null;
         }
 
         return {
-          id: user._id.toString(),
+          id: user.id,
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,
           role: user.role,
-          company: user.company?.toString(),
+          company: user.company_id,
         };
       },
     }),
@@ -51,10 +85,10 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
-        session.user.company = token.company as string;
+      if (token && session.user) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+        session.user.company = token.company;
       }
       return session;
     },
@@ -71,16 +105,16 @@ export const authOptions: NextAuthOptions = {
 };
 
 // Helper function to check if user is authenticated
-export const isAuthenticated = (session: any) => {
+export const isAuthenticated = (session: Session | null) => {
   return !!session?.user;
 };
 
 // Helper function to check if user is an admin
-export const isAdmin = (session: any) => {
+export const isAdmin = (session: Session | null) => {
   return session?.user?.role === 'admin';
 };
 
 // Helper function to check if user belongs to a company
-export const isCompanyMember = (session: any, companyId: string) => {
+export const isCompanyMember = (session: Session | null, companyId: string) => {
   return session?.user?.company === companyId;
 }; 
